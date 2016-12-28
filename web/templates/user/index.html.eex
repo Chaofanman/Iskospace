@@ -1,0 +1,8 @@
+<ul class="collection with-header">
+	<li class="collection-header">
+		<h4>Users</h4>
+	</li>
+	<%= for user <- @users do %>
+		<li class="collection-item"> <%= user.last_name %>, <%= user.first_name %> </li>
+	<% end %>
+</ul>
