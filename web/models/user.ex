@@ -20,6 +20,7 @@ defmodule Iskospace.User do
 		struct
 		|> cast(params, [:first_name, :last_name, :username, :batch, :email, :password, :password_confirmation])
 		|> validate_required([:username, :email, :password, :password_confirmation])
+		|> validate_confirmation(:password, message: "Passwords do not match")
 		|> hash_password
 	end
 
