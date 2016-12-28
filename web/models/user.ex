@@ -4,6 +4,8 @@ defmodule Iskospace.User do
 	schema "users" do
 		field :first_name, :string
 		field :last_name, :string
+		field :username, :string
+		field :batch, :integer
 		field :email, :string
 		field :password, :string
 		has_many :posts, Iskospace.Post
