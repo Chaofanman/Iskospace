@@ -6,7 +6,7 @@ defmodule Iskospace.User do
 		field :last_name, :string
 		field :email, :string
 		field :password, :string
-		has_many :posts, Iskospace.Post
+		# has_many :posts, Iskospace.Post
 
 		timestamps()
 	end

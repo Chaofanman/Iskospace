@@ -4,7 +4,7 @@ defmodule Iskospace.Post do
 	schema "posts" do
 		field :title, :string
 		field :body, :string
-		belongs_to :user, Iskospace.User
+		# belongs_to :user, Iskospace.User
 
 		timestamps()
 	end
