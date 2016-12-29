@@ -11,7 +11,7 @@ defmodule Iskospace.UserController do
 
 	def new(conn, _params) do
 		changeset = User.changeset(%User{})
-		
+
 		render(conn, "new.html", changeset: changeset)
 	end
 
@@ -52,8 +52,6 @@ defmodule Iskospace.UserController do
 				|> redirect(to: user_path(conn, :show, edited_user))
 
 			{:error, changeset} -> 
-				IO.puts "Error in update"
-				IO.inspect changeset
 				render(conn, "edit.html", changeset: changeset, user: user)
 		end
 	end
