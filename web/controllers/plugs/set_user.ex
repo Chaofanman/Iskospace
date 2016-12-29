@@ -1,6 +1,5 @@
 defmodule Iskospace.Plugs.SetUser do
 	import Plug.Conn
-	# import Phoenix.Controller
 
 	alias Iskospace.Repo
 	alias Iskospace.User

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Iskospace!</title>
+    <title>Iskospace</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     
     <!-- Compiled and minified CSS -->
@@ -18,28 +18,29 @@
   </head>
 
   <body>
+    <header class="header">
+      <nav role="navigation">
+        <ul class="nav nav-pills pull-right">
+          <%= if @conn.assigns[:user] do %>
+            <li>
+              Hello <%= @conn.assigns[:user].username %>
+            </li>
+            <li>
+              <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
+            </li>
+          <% else %>
+            <li>
+              <%= link "Create Account", to: user_path(@conn, :new) %>
+            </li>
+            <li>
+              <%= link "Login", to: session_path(@conn, :new) %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if @conn.assigns[:user] do %>
-              <li>
-                Hello <%= @conn.assigns[:user].username %>
-              </li>
-              <li>
-                <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
-              </li>
-            <% else %>
-              <li>
-                <%= link "Create Account", to: user_path(@conn, :new) %>
-              </li>
-              <li>
-                <%= link "Login", to: session_path(@conn, :new) %>
-              </li>
-            <% end %>
-          </ul>
-        </nav>
-      </header>
+      
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
