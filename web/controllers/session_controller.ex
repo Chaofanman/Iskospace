@@ -23,7 +23,7 @@ defmodule Iskospace.SessionController do
 	defp failed_login(conn) do
 		dummy_checkpw()
 		conn 
-		|> put_session(:current_user, nil)
+		|> put_session(:user_id, nil)
 		|> put_flash(:error, "Invalid email/password")
 		|> redirect(to: session_path(conn, :new))
 		|> halt()
@@ -32,12 +32,19 @@ defmodule Iskospace.SessionController do
 	defp login(user, password, conn) do
 		if checkpw(password, user.password_digest) do
 			conn
-			|> put_session(:current_user, %{id: user.id, email: user.email})
+			|> put_session(:user_id, user.id)
 			|> put_flash(:info, "Sign in successful")
 			|> redirect(to: page_path(conn, :index))
 		else 
 			conn
 			|> failed_login
 		end
+	end
+
+	def delete(conn, _params) do
+		conn 
+		|> delete_session(:user_id)
+		|> put_flash(:info, "You have logged out")
+		|> redirect(to: page_path(conn, :index))
 	end
 end
