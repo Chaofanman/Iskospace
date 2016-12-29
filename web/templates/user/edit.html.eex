@@ -1,6 +1,6 @@
-<h4>Create User</h4>
+<h4>Edit User</h4>
 
-<%= form_for @changeset, user_path(@conn, :create), fn f -> %>
+<%= form_for @changeset, user_path(@conn, :update, @user), fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -8,14 +8,32 @@
   <% end %>
 
   <div class="form-group">
+    <%= label f, :first_name, class: "control-label" %>
+    <%= text_input f, :first_name, class: "form-control", value: @user.first_name %>
+    <%= error_tag f, :first_name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :last_name, class: "control-label" %>
+    <%= text_input f, :last_name, class: "form-control", value: @user.last_name %>
+    <%= error_tag f, :last_name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :batch, class: "control-label" %>
+    <%= text_input f, :batch, class: "form-control", value: @user.batch %>
+    <%= error_tag f, :batch %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :username, class: "control-label" %>
-    <%= text_input f, :username, class: "form-control" %>
+    <%= text_input f, :username, class: "form-control", value: @user.username %>
     <%= error_tag f, :username %>
   </div>
 
   <div class="form-group">
     <%= label f, :email, class: "control-label" %>
-    <%= text_input f, :email, class: "form-control" %>
+    <%= text_input f, :email, class: "form-control", value: @user.email %>
     <%= error_tag f, :email %>
   </div>
 
