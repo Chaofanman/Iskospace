@@ -18,9 +18,17 @@ defmodule Iskospace.PostController do
 	end
 
 	def create(conn, %{"post" => post_params}) do
-		IO.puts "In post controller create"
-		IO.inspect post_params
-		conn 
-		|> redirect(to: page_path(conn, :index))
+		changeset = conn.assigns[:user]
+		|> build_assoc(:posts)
+		|> Post.changeset(post_params)
+
+		case Repo.insert(changeset) do
+			{:ok, _post} ->
+				conn
+				|> put_flash(:info, "Successfully made post")	 
+				|> redirect(to: user_post_path(conn, :index, conn.assigns[:user]))
+			{:error, changeset}
+				render(conn, "new.html", changeset: changeset)
+		end
 	end	
 end

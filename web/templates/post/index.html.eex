@@ -1,0 +1,10 @@
+<h4>Posts by <%= @conn.assigns[:user].username %></h4>
+
+<%= for post <- @posts do %>
+	<ul class="collection">
+		<li class="collection-item"> 
+			<p><strong>	<%= post.title %> </strong></p>
+			<p><%= post.body %></p>
+		</li>
+	</ul>
+<% end %>
