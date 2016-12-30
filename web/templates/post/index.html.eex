@@ -1,10 +1,13 @@
-<h4>Posts by <%= @conn.assigns[:user].username %></h4>
+<h4>Posts by <%= @posts_owner.username %></h4>
 
 <%= for post <- @posts do %>
-	<ul class="collection">
+	<ul class="collection with-header">
+		<li class="collection-header"> 
+			<strong>	<%= post.title %> </strong>
+			<%= link "Edit Post", to: user_post_path(@conn, :edit, @conn.assigns[:user], post) %>
+		</li>
 		<li class="collection-item"> 
-			<p><strong>	<%= post.title %> </strong></p>
-			<p><%= post.body %></p>
+			<%= post.body %>
 		</li>
 	</ul>
 <% end %>

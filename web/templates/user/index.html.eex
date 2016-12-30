@@ -5,7 +5,7 @@
 	<%= for user <- @users do %>
 		<li class="collection-item"> 
 			<strong> <%= user.username %>: </strong> <%= user.email %> 
-			<%= link "Edit", to: user_path(@conn, :edit, user) %>	
+			<%= link "Edit", to: user_path(@conn, :edit, @user) %>	
 		</li>
 	<% end %>
 </ul>

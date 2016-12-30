@@ -22,7 +22,5 @@ defmodule Iskospace.Plugs.AuthorizeUser do
 			|> put_flash(:error, "You are not authorized to edit this")	
 			|> redirect(to: Helpers.page_path(conn, :index))
 		end
-		
 	end
-	
 end

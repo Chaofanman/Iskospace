@@ -4,6 +4,7 @@ defmodule Iskospace.UserController do
 	alias Iskospace.User
 
 	plug Iskospace.Plugs.AuthorizeUser when action in [:edit, :update]
+	plug :scrub_params, "user" when action in [:create, :update]
 
 	def index(conn, _params) do
 		users = Repo.all(User)
