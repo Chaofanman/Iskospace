@@ -23,7 +23,10 @@ defmodule Iskospace.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
 
-    resources "/users", UserController
+    resources "/users", UserController do
+      resources "/posts", PostController
+    end
+
   end
 
   # Other scopes may use custom stacks.
