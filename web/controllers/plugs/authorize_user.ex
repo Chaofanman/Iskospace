@@ -13,9 +13,9 @@ defmodule Iskospace.Plugs.AuthorizeUser do
 
 	def call(conn, _) do
 		user_id = get_session(conn, :user_id)
-		id = conn.params["id"] |> String.to_integer
+		param_id = conn.params["id"] |> String.to_integer
 
-		if user_id == id do
+		if user_id == param_id do
 			conn
 		else 
 			conn 
