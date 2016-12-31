@@ -11,7 +11,7 @@ defmodule Iskospace.CommentController do
 			|> Repo.preload([:user, :comments])
 		
 		changeset = post 
-			|> build_assoc(:comments)
+			|> build_assoc(:comments, user_id: conn.assigns[:user].id)
 			|> Comment.changeset(comment_params)
 
 		case Repo.insert(changeset) do
