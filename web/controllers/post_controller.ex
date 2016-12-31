@@ -15,8 +15,12 @@ defmodule Iskospace.PostController do
 	def show(conn, %{"id" => post_id}) do
 		post = Repo.get!(Post, post_id)
 		|> Repo.preload(:user)
-		IO.inspect post
-		render(conn, "show.html", post: post)
+
+		comment_changeset = post 
+			|> build_assoc(:comments)
+			|> Iskospace.Comment.changeset()
+
+		render(conn, "show.html", post: post, comment_changeset: comment_changeset)
 	end
 
 	def new(conn, _params) do

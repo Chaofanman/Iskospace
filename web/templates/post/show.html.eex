@@ -1,3 +1,5 @@
 <h4> <%= @post.title %></h4>
 <p><%= @post.user.username %></p>
 <p> <%= @post.body %> </p>
+
+<%= render Iskospace.CommentView, "new.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
