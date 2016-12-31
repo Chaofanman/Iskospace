@@ -1,0 +1,15 @@
+<div class="comment">
+  <div class="row">
+    <div class="col-xs-4">
+      <strong><%= @comment.author %></strong>
+    </div>
+    <div class="col-xs-4">
+      <em><%= @comment.inserted_at %></em>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= @comment.body %>
+    </div>
+  </div>
+</div>

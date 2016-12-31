@@ -6,7 +6,6 @@ defmodule Iskospace.CommentController do
 
 	plug :scrub_params, "comment" when action in [:create, :update]
 
-
 	def create(conn, %{"comment" => comment_params, "post_id" => post_id}) do
 		post = Repo.get!(Post, post_id)
 			|> Repo.preload([:user, :comments])
