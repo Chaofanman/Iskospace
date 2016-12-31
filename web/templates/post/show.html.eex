@@ -1,5 +1,5 @@
 <h4> <%= @post.title %></h4>
-<p><%= @post.user.username %></p>
+<%= link @post.user.username, to: user_path(@conn, :show, @user) %></p>
 <p> <%= @post.body %> </p>
 
 <%= render Iskospace.CommentView, "new.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
@@ -8,5 +8,6 @@
  <h2>Comments</h2>
  <%= for comment <- @post.comments do %>
    <%= render Iskospace.CommentView, "comment.html", comment: comment %>
+   <br>
  <% end %>
 </div>

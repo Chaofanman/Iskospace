@@ -12,7 +12,7 @@
   <%= for post <- @posts do %>
     <div>
       title: <%= link post.title, to: user_post_path(@conn, :show, @conn.assigns[:user], post) %>
-      <p><strong>by: <%= post.user.username %></strong></p>
+      <p><strong>by: <%= link post.user.username, to: user_path(@conn, :show, @user) %></p></strong></p>
       <p><%= post.body %></p>
       <br>
       <br>
