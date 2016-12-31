@@ -11,9 +11,11 @@
   <h3> ALL POSTS </h3>
   <%= for post <- @posts do %>
     <div>
-      <h4><%= post.title %></h4>
-      <p><strong><%= post.user.username %></strong></p>
+      title: <%= link post.title, to: user_post_path(@conn, :show, @conn.assigns[:user], post) %>
+      <p><strong>by: <%= post.user.username %></strong></p>
       <p><%= post.body %></p>
+      <br>
+      <br>
     </div>
   <% end %>
 </div>
