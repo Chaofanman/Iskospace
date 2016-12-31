@@ -8,13 +8,11 @@ defmodule Iskospace.UserController do
 
 	def index(conn, _params) do
 		users = Repo.all(User)
-
 		render(conn, "index.html", users: users)
 	end
 
 	def new(conn, _params) do
 		changeset = User.changeset(%User{})
-
 		render(conn, "new.html", changeset: changeset)
 	end
 
@@ -33,14 +31,12 @@ defmodule Iskospace.UserController do
 
 	def show(conn, %{"id" => user_id}) do
 		user = Repo.get!(User, user_id)
-
 		render(conn, "show.html", user: user)
 	end
 
 	def edit(conn, %{"id" => user_id}) do
 		user = Repo.get(User, user_id)
 		changeset = User.changeset(user)
-
 		render(conn, "edit.html", changeset: changeset, user: user)
 	end
 
@@ -53,7 +49,6 @@ defmodule Iskospace.UserController do
 				conn 
 				|> put_flash(:info, "Profile changes done")
 				|> redirect(to: user_path(conn, :show, edited_user))
-
 			{:error, changeset} -> 
 				render(conn, "edit.html", changeset: changeset, user: user)
 		end
