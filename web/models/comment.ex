@@ -9,7 +9,7 @@ defmodule Iskospace.Comment do
 		timestamps()	
 	end
 
-	def changeset(model, params \\ :empty) do
+	def changeset(struct, params \\ :empty) do
 		struct
 		|> cast(params, [:author, :body])
 	end

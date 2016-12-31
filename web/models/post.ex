@@ -5,7 +5,7 @@ defmodule Iskospace.Post do
 		field :title, :string
 		field :body, :string
 		belongs_to :user, Iskospace.User
-		has_many :comment, Iskospace.Comment
+		has_many :comments, Iskospace.Comment
 
 		timestamps()
 	end
