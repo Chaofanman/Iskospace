@@ -27,6 +27,10 @@ defmodule Iskospace.Router do
       resources "/posts", PostController
     end
 
+    resources "/posts", PostController, only: [] do
+      resources "/comments", CommentController
+    end 
+
   end
 
   # Other scopes may use custom stacks.
