@@ -10,6 +10,7 @@ defmodule Iskospace.User do
 		field :email, :string
 		field :password_digest, :string
 		has_many :posts, Iskospace.Post
+		has_many :comments, Iskospace.Comment
 
 		timestamps()
 		field :password, :string, virtual: true
