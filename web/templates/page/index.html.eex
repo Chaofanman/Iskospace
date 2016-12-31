@@ -1,4 +1,20 @@
 <div class="center">
   <h2>Iskospace v1</h2>
-  <p class="lead">An Isko's Thoughts</p>
+  <p class="lead">An Isko's Thoughts</p>  
+
+  <%= if @conn.assigns[:user] do %>
+    <%= link "Add Post", to: user_post_path(@conn, :new, @conn.assigns[:user]) %>
+  <% end %>
 </div>
+
+<div>
+  <h3> ALL POSTS </h3>
+  <%= for post <- @posts do %>
+    <div>
+      <h4><%= post.title %></h4>
+      <p><strong><%= post.user.username %></strong></p>
+      <p><%= post.body %></p>
+    </div>
+  <% end %>
+</div>
+
