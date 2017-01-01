@@ -67,10 +67,8 @@ defmodule Iskospace.PostController do
 	end
 
 	def delete(conn , %{"id" => post_id}) do
-		IO.inspect conn.assigns[:user]
 		post = Repo.get!(assoc(conn.assigns[:user], :posts), post_id)
 		|> Repo.delete!
-		IO.inspect post
 
 		conn
 		|> put_flash(:info, "Post deleted")

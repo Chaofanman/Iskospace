@@ -28,7 +28,12 @@ defmodule Iskospace.CommentController do
 		
 	end
 
-	def delete(conn, _) do
-		
+	def delete(conn, %{"id" => comment_id, "post_id" => post_id}) do	
+		comment = Repo.get!(assoc(conn.assigns[:user], :comments), comment_id)
+			|> Repo.delete!
+
+		conn
+		|> put_flash(:info, "comment deleted")
+		|> redirect(to: user_post_path(conn, :show, conn.assigns[:user], post_id))
 	end
 end

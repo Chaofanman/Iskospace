@@ -12,4 +12,7 @@
       <%= @comment.body %>
     </div>
   </div>
+  <%= if @conn.assigns[:user] != nil and @comment.user.id == @conn.assigns[:user].id do %>
+    <%= link "Delete", to: post_comment_path(@conn, :delete, @post, @comment), method: :delete %></p>
+  <% end %>
 </div>
