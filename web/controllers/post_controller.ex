@@ -19,7 +19,7 @@ defmodule Iskospace.PostController do
 
 		comment_changeset = post 
 			|> build_assoc(:comments)
-			|> Iskospace.Comment.changeset()
+			|> Iskospace.Comment.changeset(%{})
 
 		render(conn, "show.html", post: post, comment_changeset: comment_changeset)
 	end
@@ -64,5 +64,16 @@ defmodule Iskospace.PostController do
 			{:error, changeset} -> 
 				render(conn, "edit.html", changeset: changeset, post: old_post)
 		end
+	end
+
+	def delete(conn , %{"id" => post_id}) do
+		IO.inspect conn.assigns[:user]
+		post = Repo.get!(assoc(conn.assigns[:user], :posts), post_id)
+		|> Repo.delete!
+		IO.inspect post
+
+		conn
+		|> put_flash(:info, "Post deleted")
+		|> redirect(to: user_path(conn, :show, conn.assigns[:user]))
 	end
 end
