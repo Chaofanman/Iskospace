@@ -36,8 +36,8 @@ defmodule Iskospace.UserController do
 		render(conn, "show.html", user: user, posts: posts)
 	end
 
-	def edit(conn, %{"id" => username}) do
-		user = Repo.get!(User, username)
+	def edit(conn, %{"id" => user_id}) do
+		user = Repo.get!(User, user_id)
 		changeset = User.changeset(user)
 		render(conn, "edit.html", changeset: changeset, user: user)
 	end

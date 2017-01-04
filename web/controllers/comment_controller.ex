@@ -4,7 +4,7 @@ defmodule Iskospace.CommentController do
 	alias Iskospace.Comment
 	alias Iskospace.Post
 
-	plug :scrub_params, "comment" when action in [:create, :update]
+	plug :scrub_params, "comment" when action in [:create]
 
 	def create(conn, %{"comment" => comment_params, "post_id" => post_id}) do
 		post = Repo.get!(Post, post_id)
@@ -22,10 +22,6 @@ defmodule Iskospace.CommentController do
 			{:error, changeset} ->
 				render(conn, Iskospace.PostView, "show.html", post: post, user: post.user, comment_changeset: changeset)
 		end
-	end
-
-	def update(conn, _) do
-		
 	end
 
 	def delete(conn, %{"id" => comment_id, "post_id" => post_id}) do	
