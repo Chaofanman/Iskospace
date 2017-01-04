@@ -31,7 +31,9 @@ defmodule Iskospace.PostController do
 		render(conn, "new.html", changeset: changeset)
 	end
 
-	def create(conn, %{"post" => post_params}) do
+	def create(conn, %{"post" => %{"tags" => tags} = post_params})  do
+		IO.inspect post_params
+		IO.inspect tags
 		changeset = conn.assigns[:user]
 		|> build_assoc(:posts)
 		|> Post.changeset(post_params)
@@ -55,7 +57,7 @@ defmodule Iskospace.PostController do
 	def update(conn, %{"id" => post_id, "post" => post_params}) do
 		old_post = Repo.get!(assoc(conn.assigns[:user], :posts), post_id)		
 		changeset = Post.changeset(old_post, post_params)
-
+		
 		case Repo.update(changeset) do
 			{:ok, new_post} ->
 				conn 
@@ -73,5 +75,19 @@ defmodule Iskospace.PostController do
 		conn
 		|> put_flash(:info, "Post deleted")
 		|> redirect(to: user_path(conn, :show, conn.assigns[:user]))
+	end
+
+	# defp get_tags(changeset) do
+	# 	tags = get_change(changeset, :tags)
+	# 		|> to_string
+	# 		|> String.split(",")
+	# 		|> Enum.map(&save_to_tag_database/1)
+	# 	changeset
+	# end
+
+	defp save_to_tag_database(tag) do
+		tag 
+		|> String.trim(" ")
+		|> IO.inspect 
 	end
 end
