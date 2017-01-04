@@ -2,7 +2,7 @@ defmodule Iskospace.Tag do
 	use Iskospace.Web, :model
 
 	schema "tags" do
-		field :tags, :string
+		field :tag, :string
 		has_many :posts, Iskospace.Post
 
 		timestamps()
@@ -10,7 +10,7 @@ defmodule Iskospace.Tag do
 
 	def changeset(struct, params \\ %{}) do
 		struct
-		|> cast(params, [:tags])
-		|> validate_required([:tags])
+		|> cast(params, [:tag])
+		|> validate_required([:tag])
 	end
 end
