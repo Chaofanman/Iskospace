@@ -3,6 +3,7 @@ defmodule Iskospace.PostController do
 
 	alias Iskospace.Post
 	alias Iskospace.User
+	alias Iskospace.Tag
 
 	plug :scrub_params, "post" when action in [:create, :update]
 
@@ -86,8 +87,9 @@ defmodule Iskospace.PostController do
 	end
 
 	defp save_to_tag_database(tag, post_id) do
-		tag 
-		|> String.trim
-		|> IO.inspect
+		IO.puts "post_id"
+		IO.inspect post_id
+		changeset = Tag.changeset(%Tag{}, %{tag: tag |> String.trim, post_id: post_id})
+		Repo.insert(changeset)
 	end
 end
