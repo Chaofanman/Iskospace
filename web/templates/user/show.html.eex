@@ -1,3 +1,12 @@
 <h4> <%= @user.username %> </h4>
 <p> <%= @user.batch %> </p>
 <p> <%= @user.email %> </p>
+
+<h4>Posts by <%= @user.username %></h4>
+<%= for post <- @posts do %>
+	<div>
+		title: <%= link post.title, to: user_post_path(@conn, :show, post.user, post) %>
+		<br>
+		<br>
+	</div>
+<% end %>

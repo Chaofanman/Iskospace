@@ -31,7 +31,9 @@ defmodule Iskospace.UserController do
 
 	def show(conn, %{"id" => user_id}) do
 		user = Repo.get!(User, user_id)
-		render(conn, "show.html", user: user)
+		posts = Repo.all(assoc(user, :posts))	
+			|> Repo.preload(:user)
+		render(conn, "show.html", user: user, posts: posts)
 	end
 
 	def edit(conn, %{"id" => user_id}) do
