@@ -40,8 +40,7 @@ defmodule Iskospace.PostController do
 			{:ok, %Post{body: body, id: post_id}} ->
 				tags
 				|> get_tags
-				|> IO.inspect
-				|> save_to_tag_database(post_id)
+				|> Enum.map(&save_to_tag_database(&1, post_id))
 
 				conn
 				|> put_flash(:info, "Successfully made post")	 
@@ -83,14 +82,12 @@ defmodule Iskospace.PostController do
 	defp get_tags(tags) do
 		tags
 		|> to_string
-		|> String.trim(" ")
 		|> String.split(",")
 	end
 
 	defp save_to_tag_database(tag, post_id) do
-		IO.puts "in save_to_tag_database"
-		IO.inspect tag 
-		IO.inspect post_id
-		IO.puts "out of save_to_tag_database"
+		tag 
+		|> String.trim
+		|> IO.inspect
 	end
 end
