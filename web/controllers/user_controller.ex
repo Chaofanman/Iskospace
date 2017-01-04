@@ -42,15 +42,15 @@ defmodule Iskospace.UserController do
 		render(conn, "edit.html", changeset: changeset, user: user)
 	end
 
-	def update(conn, %{"id" => username, "user" => user_params}) do
-		user = Repo.get_by!(User, username: username)
+	def update(conn, %{"id" => user_id, "user" => user_params}) do
+		user = Repo.get!(User, user_id)
 		changeset = User.changeset(user, user_params)
 
 		case Repo.update(changeset) do
 			{:ok, edited_user} -> 
 				conn 
 				|> put_flash(:info, "Profile changes done")
-				|> redirect(to: user_path(conn, :show, edited_user))
+				|> redirect(to: user_path(conn, :show, edited_user.username))
 			{:error, changeset} -> 
 				render(conn, "edit.html", changeset: changeset, user: user)
 		end
