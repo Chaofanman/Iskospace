@@ -32,14 +32,17 @@ defmodule Iskospace.PostController do
 	end
 
 	def create(conn, %{"post" => %{"tags" => tags} = post_params})  do
-		IO.inspect post_params
-		IO.inspect tags
 		changeset = conn.assigns[:user]
 		|> build_assoc(:posts)
 		|> Post.changeset(post_params)
 
 		case Repo.insert(changeset) do
-			{:ok, _post} ->
+			{:ok, %Post{body: body, id: post_id}} ->
+				tags
+				|> get_tags
+				|> IO.inspect
+				|> save_to_tag_database(post_id)
+
 				conn
 				|> put_flash(:info, "Successfully made post")	 
 				|> redirect(to: user_post_path(conn, :index, conn.assigns[:user]))
@@ -77,17 +80,17 @@ defmodule Iskospace.PostController do
 		|> redirect(to: user_path(conn, :show, conn.assigns[:user]))
 	end
 
-	# defp get_tags(changeset) do
-	# 	tags = get_change(changeset, :tags)
-	# 		|> to_string
-	# 		|> String.split(",")
-	# 		|> Enum.map(&save_to_tag_database/1)
-	# 	changeset
-	# end
-
-	defp save_to_tag_database(tag) do
-		tag 
+	defp get_tags(tags) do
+		tags
+		|> to_string
 		|> String.trim(" ")
-		|> IO.inspect 
+		|> String.split(",")
+	end
+
+	defp save_to_tag_database(tag, post_id) do
+		IO.puts "in save_to_tag_database"
+		IO.inspect tag 
+		IO.inspect post_id
+		IO.puts "out of save_to_tag_database"
 	end
 end
