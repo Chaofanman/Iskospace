@@ -13,6 +13,7 @@ defmodule Iskospace.User do
 		has_many :comments, Iskospace.Comment
 
 		timestamps()
+		
 		field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 	end
