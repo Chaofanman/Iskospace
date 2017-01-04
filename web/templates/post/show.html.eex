@@ -1,5 +1,5 @@
 <h4> <%= @post.title %></h4>
-<%= link @post.user.username, to: user_path(@conn, :show, @post.user) %></p>
+<%= link @post.user.username, to: user_path(@conn, :show, @post.user.username) %>
 <p> <%= @post.body %> </p>
 
 <%= if @conn.assigns[:user] != nil and @post.user.id == @conn.assigns[:user].id do %>

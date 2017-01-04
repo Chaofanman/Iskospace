@@ -29,21 +29,21 @@ defmodule Iskospace.UserController do
     end
   end
 
-	def show(conn, %{"id" => user_id}) do
-		user = Repo.get!(User, user_id)
+	def show(conn, %{"id" => username}) do
+		user = Repo.get_by!(User, username: username)
 		posts = Repo.all(assoc(user, :posts))	
 			|> Repo.preload(:user)
 		render(conn, "show.html", user: user, posts: posts)
 	end
 
-	def edit(conn, %{"id" => user_id}) do
-		user = Repo.get(User, user_id)
+	def edit(conn, %{"id" => username}) do
+		user = Repo.get!(User, username)
 		changeset = User.changeset(user)
 		render(conn, "edit.html", changeset: changeset, user: user)
 	end
 
-	def update(conn, %{"id" => user_id, "user" => user_params}) do
-		user = Repo.get!(User, user_id)
+	def update(conn, %{"id" => username, "user" => user_params}) do
+		user = Repo.get_by!(User, username: username)
 		changeset = User.changeset(user, user_params)
 
 		case Repo.update(changeset) do
