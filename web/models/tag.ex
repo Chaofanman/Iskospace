@@ -2,15 +2,11 @@ defmodule Iskospace.Tag do
 	use Iskospace.Web, :model
 
 	schema "tags" do
-		field :tag, :string
-		has_many :posts, Iskospace.Post
+		field :title, :string
 
-		timestamps()
-	end
+		has_many :taggings, Iskospace.Tagging
+		has_many :posts, through: [:taggings, :posts]
 
-	def changeset(struct, params \\ %{}) do
-		struct
-		|> cast(params, [:tag])
-		|> validate_required([:tag])
+		timestamps
 	end
 end

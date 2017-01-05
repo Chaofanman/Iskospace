@@ -3,7 +3,6 @@ defmodule Iskospace.PostController do
 
 	alias Iskospace.Post
 	alias Iskospace.User
-	alias Iskospace.Tag
 
 	plug :scrub_params, "post" when action in [:create, :update]
 
@@ -39,10 +38,6 @@ defmodule Iskospace.PostController do
 
 		case Repo.insert(changeset) do
 			{:ok, %Post{body: body, id: post_id}} ->
-				tags
-				|> get_tags
-				|> Enum.map(&save_to_tag_database(&1, post_id))
-
 				conn
 				|> put_flash(:info, "Successfully made post")	 
 				|> redirect(to: user_post_path(conn, :index, conn.assigns[:user]))
@@ -78,18 +73,5 @@ defmodule Iskospace.PostController do
 		conn
 		|> put_flash(:info, "Post deleted")
 		|> redirect(to: user_path(conn, :show, conn.assigns[:user]))
-	end
-
-	defp get_tags(tags) do
-		tags
-		|> to_string
-		|> String.split(",")
-	end
-
-	defp save_to_tag_database(tag, post_id) do
-		IO.puts "post_id"
-		IO.inspect post_id
-		changeset = Tag.changeset(%Tag{}, %{tag: tag |> String.trim, post_id: post_id})
-		Repo.insert(changeset)
 	end
 end
