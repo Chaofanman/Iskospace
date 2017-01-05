@@ -9,10 +9,7 @@ defmodule Iskospace.Post do
 		has_many :taggings, Iskospace.Tagging
 		has_many :tags, through: [:taggings, :tags]
 
-
 		timestamps()
-
-
 	end
 
 	def changeset(struct, params \\ %{}) do

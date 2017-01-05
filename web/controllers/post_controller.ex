@@ -27,6 +27,7 @@ defmodule Iskospace.PostController do
 	def new(conn, _params) do
 		changeset = conn.assigns[:user]
 		|> build_assoc(:posts)
+		|> Repo.preload(changeset: :tags)
 		|> Post.changeset()
 		render(conn, "new.html", changeset: changeset)
 	end
