@@ -6,11 +6,12 @@ defmodule Iskospace.Post do
 		field :body, :string
 		belongs_to :user, Iskospace.User
 		has_many :comments, Iskospace.Comment
+		has_many :tags, Iskospace.Tag
 
 
 		timestamps()
 
-		# field :tags, :string, virtual: true
+		#field :tags, :string, virtual: true
 	end
 
 	def changeset(struct, params \\ %{}) do

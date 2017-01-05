@@ -3,7 +3,7 @@ defmodule Iskospace.Tag do
 
 	schema "tags" do
 		field :tag, :string
-		has_many :posts, Iskospace.Post
+		belongs_to :posts, Iskospace.Post
 
 		timestamps()
 	end
