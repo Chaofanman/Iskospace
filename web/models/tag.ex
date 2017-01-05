@@ -3,14 +3,14 @@ defmodule Iskospace.Tag do
 
 	schema "tags" do
 		field :tag, :string
-		belongs_to :posts, Iskospace.Post
+		belongs_to :post, Iskospace.Post
 
 		timestamps()
 	end
 
 	def changeset(struct, params \\ %{}) do
 		struct
-		|> cast(params, [:tag])
-		|> validate_required([:tag])
+		|> cast(params, [:tag, :post_id])
+		|> validate_required([:tag, :post_id])
 	end
 end

@@ -11,7 +11,7 @@ defmodule Iskospace.Post do
 
 		timestamps()
 
-		#field :tags, :string, virtual: true
+		field :tags_from_form, :string, virtual: true
 	end
 
 	def changeset(struct, params \\ %{}) do

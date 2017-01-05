@@ -32,7 +32,7 @@ defmodule Iskospace.PostController do
 		render(conn, "new.html", changeset: changeset)
 	end
 
-	def create(conn, %{"post" => %{"tags" => tags} = post_params})  do
+	def create(conn, %{"post" => %{"tags_from_form" => tags} = post_params})  do
 		changeset = conn.assigns[:user]
 		|> build_assoc(:posts)
 		|> Post.changeset(post_params)
@@ -87,9 +87,11 @@ defmodule Iskospace.PostController do
 	end
 
 	defp save_to_tag_database(tag, post_id) do
-		IO.puts "post_id"
-		IO.inspect post_id
-		changeset = Tag.changeset(%Tag{}, %{tag: tag |> String.trim, post_id: post_id})
-		Repo.insert(changeset)
+		tag_params = %{tag: tag |> String.trim} 
+		post = Repo.get!(Post, post_id)
+		changeset = post
+		|> build_assoc(:tags)
+		|> Tag.changeset(tag_params)
+		|> Repo.insert
 	end
 end
