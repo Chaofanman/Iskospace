@@ -88,8 +88,7 @@ defmodule Iskospace.PostController do
 
 	defp save_to_tag_database(tag, post_id) do
 		tag_params = %{tag: tag |> String.trim} 
-		post = Repo.get!(Post, post_id)
-		changeset = post
+		changeset = Repo.get!(Post, post_id)
 		|> build_assoc(:tags)
 		|> Tag.changeset(tag_params)
 		|> Repo.insert
