@@ -1,1 +1,8 @@
 <h4><%= @tag %></h4>
+
+<%= for tagged_post <- @posts_with_tag do %>
+	<p>title: <strong>	<%= link tagged_post.post.title, to: user_post_path(@conn, :show, tagged_post.post.user, tagged_post.post) %> </strong></p>
+	<p>by: <%= link tagged_post.post.user.username, to: user_path(@conn, :show, tagged_post.post.user.username) %></p>
+	<p><%= tagged_post.post.body %></p>
+	<br>
+<% end %>

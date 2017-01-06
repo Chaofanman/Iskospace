@@ -12,11 +12,10 @@ defmodule Iskospace.TagController do
 	end
 
 	def show(conn, %{"tag" => tag}) do
-		posts_with_tag = Repo.all(from t in "tags", 
+		posts_with_tag = Repo.all(from t in Tag, 
 																where: t.tag == ^tag, 
-																select: [:id, :tag, :post_id],
-																preload: [:user])
-		IO.inspect posts_with_tag
-		render(conn, "show.html", tag: tag)
+																select: struct(t, [:id, :tag, :post_id]),
+																preload: [post: :user])
+		render(conn, "show.html", tag: tag, posts_with_tag: posts_with_tag)
 	end
 end
