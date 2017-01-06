@@ -1,0 +1,7 @@
+<h4>Tags</h4>
+
+<%= for tag <- @tags do %>
+	<ul>
+		<li>	<%= tag.tag %>  </li>
+	</ul>
+<% end %>
