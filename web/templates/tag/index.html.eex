@@ -2,6 +2,6 @@
 
 <%= for tag <- @tags do %>
 	<ul>
-		<li>	<%= tag.tag %>  </li>
+		<%= link tag.tag, to: tag_path(@conn, :show, tag.tag) %>
 	</ul>
 <% end %>

@@ -32,6 +32,7 @@ defmodule Iskospace.Router do
     end 
 
     get "/tags", TagController, :index
+    get "/tags/:tag", TagController, :show
 
   end
 
