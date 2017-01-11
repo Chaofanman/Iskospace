@@ -7,7 +7,8 @@ defmodule Iskospace.TagController do
 
 	def index(conn, _params) do
 		# tags = Repo.all(from t in Tag, preload: [post: :user])
-		tags = Repo.all(Tag)
+		tags = Repo.all(from t in Tag, select: t.tag)
+		|> Enum.uniq
 		render(conn, "index.html", tags: tags)
 	end
 
