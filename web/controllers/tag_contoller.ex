@@ -6,13 +6,14 @@ defmodule Iskospace.TagController do
 	alias Iskospace.Tag
 
 	def index(conn, _params) do
-		# tags = Repo.all(from t in Tag, preload: [post: :user])
+		changeset = Tag.changeset(%Tag{})
 		tags = Repo.all(from t in Tag, select: t.tag)
 		|> Enum.uniq
-		render(conn, "index.html", tags: tags)
+		render(conn, "index.html", tags: tags, changeset: changeset)
 	end
 
 	def show(conn, %{"tag" => tag}) do
+	  IO.inspect tag
 		posts_with_tag = Repo.all(from t in Tag, 
 																where: t.tag == ^tag, 
 																select: struct(t, [:id, :tag, :post_id]),

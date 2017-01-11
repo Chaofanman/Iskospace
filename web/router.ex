@@ -28,7 +28,7 @@ defmodule Iskospace.Router do
     end
 
     resources "/posts", PostController, only: [] do
-      resources "/comments", CommentController, only: [:create, :delete, :update]
+      resources "/comments", CommentController, only: [:create, :delete]
     end 
 
     get "/tags", TagController, :index
