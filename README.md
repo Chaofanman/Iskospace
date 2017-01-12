@@ -14,8 +14,4 @@ Functionalities to be added (eventually?)
 * Websocket implementation of sockets
 * Posting images in posts 
 
-<<<<<<< HEAD
 [Live site](iskospace.herokuapp.com)
-=======
-iskospace.herokuapp.com
->>>>>>> 1496bc25edd35274603137941bdb7fc29105c27d
