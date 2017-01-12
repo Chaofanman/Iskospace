@@ -1,6 +1,6 @@
 <h4>Tags</h4>
 
-<%= form_for @changeset, tag_path(@conn, :index), fn f -> %>
+<%= form_for @conn, tag_path(@conn, :index), [as: :search], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
